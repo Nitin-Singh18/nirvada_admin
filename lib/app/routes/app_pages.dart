@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/create_election/bindings/createElectionBindings.dart';
+import '../modules/create_election/views/createElectionView.dart';
 import '../modules/election_screen/bindings/election_screen_binding.dart';
 import '../modules/election_screen/views/election_screen_view.dart';
 import '../modules/election_status/bindings/election_status_binding.dart';
@@ -14,7 +16,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.ELECTION_STATUS;
+  static const INITIAL = Routes.HOME;
 
   static final routes = [
     GetPage(
@@ -36,6 +38,11 @@ class AppPages {
       name: _Paths.ELECTION_STATUS,
       page: () => const ElectionStatusView(),
       binding: ElectionStatusBinding(),
+    ),
+    GetPage(
+      name: _Paths.CREATE_ELECTION,
+      page: () => const CreateElectionView(),
+      binding: CreateElectionBinding(),
     ),
   ];
 }

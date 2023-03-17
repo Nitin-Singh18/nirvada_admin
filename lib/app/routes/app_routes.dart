@@ -7,6 +7,7 @@ abstract class Routes {
   static const VOTER_LIST_SCREEN = _Paths.VOTER_LIST_SCREEN;
   static const ELECTION_SCREEN = _Paths.ELECTION_SCREEN;
   static const ELECTION_STATUS = _Paths.ELECTION_STATUS;
+  static const CREATE_ELECTION = _Paths.CREATE_ELECTION;
 }
 
 abstract class _Paths {
@@ -15,4 +16,5 @@ abstract class _Paths {
   static const VOTER_LIST_SCREEN = '/voter-list-screen';
   static const ELECTION_SCREEN = '/election-screen';
   static const ELECTION_STATUS = '/election-status';
+  static const CREATE_ELECTION = '/create-election';
 }

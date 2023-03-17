@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
-import 'package:nirvada_admin/app/data/widgets/custom_appbar.dart';
+import 'package:nirvada_admin/app/data/widgets/AppName.dart';
 import 'package:nirvada_admin/app/data/widgets/xText.dart';
 
 import '../../../data/widgets/home_tile.dart';
@@ -15,7 +15,7 @@ class ElectionScreenView extends GetView<ElectionScreenController> {
     return Scaffold(
         body: Column(
       children: [
-        CustomAppbar(),
+        AppName(),
         Column(
           children: [
             Padding(
@@ -74,17 +74,17 @@ class ElectionScreenView extends GetView<ElectionScreenController> {
                 padding: EdgeInsets.symmetric(horizontal: 24.w),
                 child: SizedBox(
                   height: 200.h,
-                  child: GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        mainAxisSpacing: 26.h,
-                        crossAxisSpacing: 26.w,
-                        childAspectRatio: 3.5),
-                    itemCount: 3,
-                    itemBuilder: (context, index) {
-                      return HomeTile();
-                    },
-                  ),
+                  // child: GridView.builder(
+                  //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  //       crossAxisCount: 3,
+                  //       mainAxisSpacing: 26.h,
+                  //       crossAxisSpacing: 26.w,
+                  //       childAspectRatio: 3.5),
+                  //   itemCount: 3,
+                  //   itemBuilder: (context, index) {
+                  //     return HomeTile();
+                  //   },
+                  // ),
                 ),
               ),
               Padding(
