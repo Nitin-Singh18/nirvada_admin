@@ -20,12 +20,12 @@ dev_dependencies:
 
 flutter: 
   uses-material-design: true
-
-assets:
-   - assets/onboard/
+  assets:
    - assets/images/
-fonts:
-  - family: Poppins
-    fonts:
-      - asset: assets/fonts/Poppins-Regular.ttf
-      - asset: assets/fonts/Poppins-SemiBold.ttf   
+
+
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Regular.ttf
+        - asset: assets/fonts/Poppins-SemiBold.ttf
