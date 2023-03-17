@@ -37,7 +37,9 @@ class CreateElectionView extends GetView<CreateElectionController> {
                       width: 150.w,
                     ),
                     TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          controller.onCandidateList(context, 5);
+                        },
                         child: XText(
                           size: 20.sp,
                           text: "Candidate List",

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:nirvada_admin/app/data/widgets/cButton.dart';
+import 'package:nirvada_admin/app/data/widgets/candidateTile.dart';
 import 'package:nirvada_admin/app/data/widgets/textField.dart';
 import 'package:nirvada_admin/app/data/widgets/xText.dart';
 
@@ -12,6 +13,22 @@ class CreateElectionController extends GetxController {
   String date = "Select Election Date";
   String startTime = "Select Alloted Election Start Time";
   String endTime = "Select Alloted Election End Time";
+
+
+  void onCandidateList(context, int itemCount){
+    Get.dialog(
+      AlertDialog(
+        content: Container(
+          height: 700.h,
+          width: 440.w,
+          color: Colors.white,
+          child: ListView.builder(itemBuilder: (context, index){
+            return CandidateTile();
+          }),
+        ),
+      )
+    );
+  }
 
   void onAddCandidate(context, int itemCount){
    Get.dialog(
