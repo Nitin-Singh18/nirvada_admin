@@ -57,25 +57,49 @@ class CreateElectionView extends GetView<CreateElectionController> {
                     SizedBox(
                       height: 36.h,
                     ),
-                    DropdownButtonFormField(items: [
-                      DropdownMenuItem(
-                        child: XText(
-                          text: "Select Election Type",
-                          size: 14.sp,
+                    DropdownButtonFormField(
+                      value: "Select Election Type",
+                      items: [
+                        DropdownMenuItem(
+                          child: XText(
+                            text: "Select Election Type",
+                            size: 14.sp,
+                          ),
+                          value: "Select Election Type",
                         ),
-                      )
-                    ], onChanged: (value) {}),
+                        DropdownMenuItem(
+                          child: XText(
+                            text: "State",
+                            size: 14.sp,
+                          ),
+                          value: "State",
+                        ),
+                      ],
+                      onChanged: (value) {},
+                    ),
                     SizedBox(
                       height: 36.h,
                     ),
-                    DropdownButtonFormField(items: [
-                      DropdownMenuItem(
-                        child: XText(
-                          text: "Select Area",
-                          size: 14.sp,
+                    DropdownButtonFormField(
+                      value: "Select Area",
+                      items: [
+                        DropdownMenuItem(
+                          child: XText(
+                            text: "Select Area",
+                            size: 14.sp,
+                          ),
+                          value: "Select Area",
                         ),
-                      )
-                    ], onChanged: (value) {}),
+                        DropdownMenuItem(
+                          child: XText(
+                            text: "Haryana",
+                            size: 14.sp,
+                          ),
+                          value: "Haryana",
+                        ),
+                      ],
+                      onChanged: (value) {},
+                    ),
                     SizedBox(
                       height: 36.h,
                     ),
@@ -88,17 +112,19 @@ class CreateElectionView extends GetView<CreateElectionController> {
                       width: 440.w,
                       height: 400.h,
                       child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: ListView.builder(
-                          itemCount: 5,
-                          itemBuilder: (context, index){
-                            return ListTile(
-                              title: XText(text :"SubArea 1"),
-                              trailing: TextButton(onPressed: (){}, child: XText(text :"Add Candidate"),),
-                            );
-                          },
-                        )
-                      ),
+                          padding: const EdgeInsets.all(16.0),
+                          child: ListView.builder(
+                            itemCount: 5,
+                            itemBuilder: (context, index) {
+                              return ListTile(
+                                title: XText(text: "SubArea 1"),
+                                trailing: TextButton(
+                                  onPressed: () {},
+                                  child: XText(text: "Add Candidate"),
+                                ),
+                              );
+                            },
+                          )),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8.r),
                         color: Color(0xff06038D).withOpacity(0.2),
