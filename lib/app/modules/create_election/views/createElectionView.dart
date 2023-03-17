@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:nirvada_admin/app/data/widgets/AppName.dart';
-import 'package:nirvada_admin/app/data/widgets/custom_appbar.dart';
 import 'package:nirvada_admin/app/data/widgets/textField.dart';
 import 'package:nirvada_admin/app/data/widgets/xText.dart';
 import 'package:nirvada_admin/app/modules/create_election/controllers/createElectionController.dart';
@@ -87,16 +86,18 @@ class CreateElectionView extends GetView<CreateElectionController> {
                     ),
                     Container(
                       width: 440.w,
+                      height: 400.h,
                       child: Padding(
                         padding: const EdgeInsets.all(16.0),
-                        child: Column(
-                          children: [
-                            CustomTextField(
-                                title: "Add Booth",
-                                hintText: "Enter booth name to add",
-                                controller: TextEditingController())
-                          ],
-                        ),
+                        child: ListView.builder(
+                          itemCount: 5,
+                          itemBuilder: (context, index){
+                            return ListTile(
+                              title: XText(text :"SubArea 1"),
+                              trailing: TextButton(onPressed: (){}, child: XText(text :"Add Candidate"),),
+                            );
+                          },
+                        )
                       ),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8.r),

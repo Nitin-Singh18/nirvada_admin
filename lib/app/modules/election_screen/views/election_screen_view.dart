@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
-import 'package:nirvada_admin/app/data/widgets/custom_appbar.dart';
+import 'package:nirvada_admin/app/data/widgets/AppName.dart';
 import 'package:nirvada_admin/app/data/widgets/xText.dart';
 
 import '../../../data/widgets/home_tile.dart';
@@ -15,7 +15,7 @@ class ElectionScreenView extends GetView<ElectionScreenController> {
     return Scaffold(
         body: Column(
       children: [
-        CustomAppbar(),
+        AppName(),
         Column(
           children: [
             Padding(

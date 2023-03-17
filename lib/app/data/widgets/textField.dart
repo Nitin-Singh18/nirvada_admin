@@ -9,6 +9,7 @@ class CustomTextField extends StatefulWidget {
   final validator;
   final bool? isObsecure;
   final suffixIcon;
+  final bool isFillWhite;
   const CustomTextField(
       {super.key,
       required this.title,
@@ -16,6 +17,7 @@ class CustomTextField extends StatefulWidget {
       required this.controller,
       this.validator,
       this.isObsecure,
+      this.isFillWhite = false,
       this.suffixIcon});
 
   @override
@@ -66,7 +68,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
                     color: Color(0xB31B1B1B)),
-                fillColor: Color(0x4DD9D9D9),
+                fillColor: widget.isFillWhite ? Color(0xffFFFFFF) : Color(0x4DD9D9D9),
                 filled: true,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(6.r),
