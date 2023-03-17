@@ -74,17 +74,17 @@ class ElectionScreenView extends GetView<ElectionScreenController> {
                 padding: EdgeInsets.symmetric(horizontal: 24.w),
                 child: SizedBox(
                   height: 200.h,
-                  child: GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        mainAxisSpacing: 26.h,
-                        crossAxisSpacing: 26.w,
-                        childAspectRatio: 3.5),
-                    itemCount: 3,
-                    itemBuilder: (context, index) {
-                      return HomeTile();
-                    },
-                  ),
+                  // child: GridView.builder(
+                  //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  //       crossAxisCount: 3,
+                  //       mainAxisSpacing: 26.h,
+                  //       crossAxisSpacing: 26.w,
+                  //       childAspectRatio: 3.5),
+                  //   itemCount: 3,
+                  //   itemBuilder: (context, index) {
+                  //     return HomeTile();
+                  //   },
+                  // ),
                 ),
               ),
               Padding(
