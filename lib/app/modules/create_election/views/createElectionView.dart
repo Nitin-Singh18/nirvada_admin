@@ -107,7 +107,9 @@ class CreateElectionView extends GetView<CreateElectionController> {
                                     fontWeight: FontWeight.w600,
                                   ),
                                   trailing: TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      controller.onAddCandidate(context, 5);
+                                    },
                                     child: XText(
                                       size: 14.sp,
                                       text: "Add Candidate",
