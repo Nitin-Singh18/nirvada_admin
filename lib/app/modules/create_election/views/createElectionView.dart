@@ -36,6 +36,14 @@ class CreateElectionView extends GetView<CreateElectionController> {
                     SizedBox(
                       width: 150.w,
                     ),
+                    TextButton(
+                        onPressed: () {},
+                        child: XText(
+                          size: 20.sp,
+                          text: "Candidate List",
+                          color: Color(0xFF06038D),
+                          fontWeight: FontWeight.w600,
+                        ))
                   ]),
               decoration: BoxDecoration(
                   color: Colors.white,

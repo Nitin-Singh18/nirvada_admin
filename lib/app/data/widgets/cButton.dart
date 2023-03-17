@@ -17,10 +17,13 @@ class CButton extends StatelessWidget {
         height: height,
         width: width,
         alignment: Alignment.center,
-        child: XText(
-          text: title,
-          color: Colors.white,
-          size: 18.sp,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: XText(
+            text: title,
+            color: Colors.white,
+            size: 18.sp,
+          ),
         ),
         decoration: BoxDecoration(
             color: Color(0xff06038D), borderRadius: BorderRadius.circular(6.r)),
