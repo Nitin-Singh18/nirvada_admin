@@ -7,12 +7,17 @@ class CButton extends StatelessWidget {
   final Function onTap;
   final double height;
   final double width;
-  const CButton({super.key, required this.title, required this.width, required this.height, required this.onTap});
+  const CButton(
+      {super.key,
+      required this.title,
+      required this.width,
+      required this.height,
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap(),
+      onTap: () => onTap(),
       child: Container(
         height: height,
         width: width,

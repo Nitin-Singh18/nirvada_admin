@@ -9,11 +9,17 @@ class CreateElectionFuntions {
       Uri uri = Uri.parse(
           "https://upset-erin-cardigan.cyclic.app/election_details/insert");
 
-      await http.post(
+      final response = await http.post(
         uri,
         headers: {"Content-Type": "application/json"},
         body: json.encode(electionDetails),
       );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        print(response.body);
+      }
+
+      print(response.body);
     } catch (e) {
       print(e);
     }

@@ -118,7 +118,7 @@ class CreateElectionView extends GetView<CreateElectionController> {
                       height: 36.h,
                     ),
                     XText(
-                      text: "SubArea in <StateName>",
+                      text: "SubArea in ${controller.state}",
                       size: 20.sp,
                       fontWeight: FontWeight.w600,
                     ),
@@ -143,7 +143,9 @@ class CreateElectionView extends GetView<CreateElectionController> {
                                   ),
                                   trailing: TextButton(
                                     onPressed: () {
-                                      controller.onAddCandidate(context, 5);
+                                      controller.onAddCandidate(
+                                          "haryana/${controller.subAreaList[index]}",
+                                          context);
                                     },
                                     child: XText(
                                       size: 14.sp,
@@ -162,41 +164,33 @@ class CreateElectionView extends GetView<CreateElectionController> {
                       ),
                     ),
                     SizedBox(height: 24.h),
-                    DateTimeTile(
-                        title: controller.date,
-                        onTap: () async {
-                          DateTime? datePicked = await showDatePicker(
-                            context: context,
-                            initialDate: DateTime.now(),
-                            firstDate: DateTime.now(),
-                            lastDate: DateTime(2050),
-                          );
-                        },
-                        iconData: Icons.calendar_month_rounded),
+                    Obx(
+                      () => DateTimeTile(
+                        title: controller.date.value,
+                        onTap: () => controller.onChangeElectionDate(context),
+                        iconData: Icons.calendar_month_rounded,
+                      ),
+                    ),
                     SizedBox(height: 24.h),
-                    DateTimeTile(
+                    Obx(
+                      () => DateTimeTile(
                         title: controller.startTime.value,
-                        onTap: () async {
-                          TimeOfDay? timePicked = await showTimePicker(
-                            context: context,
-                            initialTime: TimeOfDay.now(),
-                          );
-                        },
-                        iconData: Icons.timer),
+                        onTap: () => controller.onChangeStartTime(context),
+                        iconData: Icons.timer,
+                      ),
+                    ),
                     SizedBox(height: 24.h),
-                    DateTimeTile(
-                        title: controller.endTime.value,
-                        onTap: () async {
-                          TimeOfDay? timePicked = await showTimePicker(
-                            context: context,
-                            initialTime: TimeOfDay.now(),
-                          );
-                        },
-                        iconData: Icons.timer),
+                    Obx(() => DateTimeTile(
+                          title: controller.endTime.value,
+                          onTap: () => controller.onChangeEndTime(context),
+                          iconData: Icons.timer,
+                        )),
                     SizedBox(height: 24.h),
                     CButton(
                       title: "Create Election",
-                      onTap: () {},
+                      onTap: () {
+                        controller.onCreateElection();
+                      },
                       width: 440.w,
                       height: 70.h,
                     )

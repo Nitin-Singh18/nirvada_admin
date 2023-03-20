@@ -11,6 +11,7 @@ import 'package:nirvada_admin/app/data/widgets/cButton.dart';
 import 'package:nirvada_admin/app/data/widgets/candidateTile.dart';
 import 'package:nirvada_admin/app/data/widgets/textField.dart';
 import 'package:nirvada_admin/app/data/widgets/xText.dart';
+import 'package:nirvada_admin/app/modules/create_election/functions/create_election_fucntions.dart';
 import 'package:uuid/uuid.dart';
 
 class CreateElectionController extends GetxController {
@@ -21,11 +22,19 @@ class CreateElectionController extends GetxController {
   String base64EncodedCandidateImage = "";
   String base64EncodedCandidatePartyImage = "";
 
-  String date = "Select Election Date";
+  RxString date = "Select Election Date".obs;
   RxString startTime = "Select Alloted Election Start Time".obs;
   RxString endTime = "Select Alloted Election End Time".obs;
-  String electionType = "State";
+  RxString electionType = "State".obs;
   String state = "Haryana";
+  String electionId = "";
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    electionId = Uuid().v1();
+  }
   // TimeOfDay startTime = TimeOfDay.now();
 
 //   Future<void> selectTime(BuildContext context) async {
@@ -45,7 +54,46 @@ class CreateElectionController extends GetxController {
 //     });
 //   }
 
-  void onChangeEndTime() {}
+  void onChangeElectionDate(BuildContext context) async {
+    final initialDate = DateTime.now();
+
+    DateTime? datePicked = await showDatePicker(
+      context: context,
+      initialDate: initialDate,
+      firstDate: initialDate,
+      lastDate: DateTime(2050),
+    );
+
+    if (datePicked != null) {
+      date.value = "${datePicked.day}-${datePicked.month}-${datePicked.year}";
+    }
+  }
+
+  void onChangeEndTime(BuildContext context) async {
+    final currentTime = TimeOfDay.now();
+
+    final TimeOfDay? time = await showTimePicker(
+      context: context,
+      initialTime: currentTime,
+    );
+
+    if (time != null && time != currentTime) {
+      endTime.value = time.format(context);
+    }
+  }
+
+  void onChangeStartTime(BuildContext context) async {
+    final currentTime = TimeOfDay.now();
+
+    final TimeOfDay? time = await showTimePicker(
+      context: context,
+      initialTime: currentTime,
+    );
+
+    if (time != null && time != currentTime) {
+      startTime.value = time.format(context);
+    }
+  }
 
   void onCandidateList(context, int itemCount) {
     Get.dialog(AlertDialog(
@@ -65,9 +113,10 @@ class CreateElectionController extends GetxController {
     ));
   }
 
-  void onAddCandidate(context, int itemCount) {
-    Get.dialog(
-      AlertDialog(
+  void onAddCandidate(String booth, BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
         contentPadding: EdgeInsets.all(18.h),
         content: Container(
           height: 500.h,
@@ -94,7 +143,7 @@ class CreateElectionController extends GetxController {
               CustomTextField(
                 title: "Candidate Party Name",
                 hintText: "Enter the candidate party name",
-                controller: candidateNameController,
+                controller: candidatePartyController,
               ),
               SizedBox(
                 height: 24.h,
@@ -103,25 +152,30 @@ class CreateElectionController extends GetxController {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
-                    child: Container(
-                        height: 100.h,
-                        alignment: Alignment.center,
-                        color: Color(0x4DD9D9D9),
-                        child: Padding(
-                          padding: const EdgeInsets.all(18.0),
-                          child: Column(
-                            children: [
-                              Icon(
-                                Icons.add_a_photo,
-                                color: Color(0xff1b1b1b),
-                              ),
-                              XText(
-                                text: "Add party symbol",
-                                size: 14.sp,
-                              )
-                            ],
-                          ),
-                        )),
+                    child: InkWell(
+                      onTap: () {
+                        onPickImage(1);
+                      },
+                      child: Container(
+                          height: 100.h,
+                          alignment: Alignment.center,
+                          color: Color(0x4DD9D9D9),
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Column(
+                              children: [
+                                Icon(
+                                  Icons.add_a_photo,
+                                  color: Color(0xff1b1b1b),
+                                ),
+                                XText(
+                                  text: "Add party symbol",
+                                  size: 10.sp,
+                                )
+                              ],
+                            ),
+                          )),
+                    ),
                   ),
                   SizedBox(
                     width: 12.w,
@@ -130,7 +184,9 @@ class CreateElectionController extends GetxController {
                     title: "Add Picture",
                     width: 100.h,
                     height: 100.h,
-                    onTap: () {},
+                    onTap: () {
+                      onPickImage(0);
+                    },
                   )
                 ],
               ),
@@ -138,8 +194,29 @@ class CreateElectionController extends GetxController {
                 height: 24.h,
               ),
               CButton(
-                title: "Create Election",
-                onTap: () {},
+                title: "Add Candidate",
+                onTap: () {
+                  final candidateId = Uuid().v1();
+
+                  candidateModeList.add(
+                    CandidateModel(
+                      candidateId: candidateId,
+                      electionId: electionId,
+                      candidateName: candidateNameController.text,
+                      candidatePartyName: candidatePartyController.text,
+                      candidatePartySign: base64EncodedCandidatePartyImage,
+                      candidateImage: base64EncodedCandidateImage,
+                      candidateVoteCount: 0,
+                      booth: booth,
+                    ),
+                  );
+                  candidateNameController.clear();
+                  candidatePartyController.clear();
+                  base64EncodedCandidateImage = "";
+                  base64EncodedCandidatePartyImage = "";
+
+                  Navigator.pop(context);
+                },
                 width: 440.w,
                 height: 70.h,
               )
@@ -150,31 +227,42 @@ class CreateElectionController extends GetxController {
     );
   }
 
-  void onPickImage() async {
+  void onPickImage(int number) async {
     final pickedImage =
         await ImagePicker.platform.pickImage(source: ImageSource.gallery);
 
     if (pickedImage != null) {
-      final bytes = await File(pickedImage.path).readAsBytes();
-      base64EncodedCandidateImage = base64Encode(bytes);
+      final bytes = await pickedImage.readAsBytes();
+      if (number == 0) {
+        base64EncodedCandidateImage = base64Encode(bytes);
+        print(base64EncodedCandidateImage);
+      } else {
+        base64EncodedCandidatePartyImage = base64Encode(bytes);
+        print(base64EncodedCandidatePartyImage);
+      }
     }
   }
 
   void onCreateElection() async {
-    String electionId = Uuid().v1();
-
     ElectionModel electionModel = ElectionModel(
       electionId: electionId,
       electionName: electionName.text,
-      electionType: electionType,
+      electionType: electionType.value,
       electionState: state,
-      electionDate: date,
-      electionStartingTime: "",
-      electionEndingTime: "",
+      electionDate: date.value,
+      electionStartingTime: startTime.value,
+      electionEndingTime: endTime.value,
     );
 
-    
+    List<Map<String, dynamic>> cadidateMapList =
+        candidateModeList.map((e) => e.toJson()).toList();
 
+    Map<String, dynamic> electionDetails = {
+      "election_data": electionModel.toJson(),
+      "candidate_data": cadidateMapList,
+    };
+
+    await CreateElectionFuntions.createElectionFunctions(electionDetails);
   }
 
   List<String> subAreaList = [

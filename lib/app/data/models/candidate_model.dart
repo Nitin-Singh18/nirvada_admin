@@ -4,17 +4,20 @@ class CandidateModel {
   late String candidateName;
   late String candidatePartyName;
   late String candidatePartySign;
-  late String candidateVoteCount;
+  late String candidateImage;
+  late int candidateVoteCount;
   late String booth;
 
-  CandidateModel(
-      {required this.candidateId,
-      required this.electionId,
-      required this.candidateName,
-      required this.candidatePartyName,
-      required this.candidatePartySign,
-      required this.candidateVoteCount,
-      required this.booth});
+  CandidateModel({
+    required this.candidateId,
+    required this.electionId,
+    required this.candidateName,
+    required this.candidatePartyName,
+    required this.candidatePartySign,
+    required this.candidateVoteCount,
+    required this.candidateImage,
+    required this.booth,
+  });
 
   CandidateModel.fromJson(Map<String, dynamic> json) {
     candidateId = json['candidate_id'];
@@ -23,6 +26,7 @@ class CandidateModel {
     candidatePartyName = json['candidate_party_name'];
     candidatePartySign = json['candidate_party_sign'];
     candidateVoteCount = json['candidate_vote_count'];
+    candidateImage = json['candidate_image'];
     booth = json['booth'];
   }
 
@@ -34,6 +38,7 @@ class CandidateModel {
     data['candidate_party_name'] = this.candidatePartyName;
     data['candidate_party_sign'] = this.candidatePartySign;
     data['candidate_vote_count'] = this.candidateVoteCount;
+    data['candidate_image'] = this.candidateImage;
     data['booth'] = this.booth;
     return data;
   }

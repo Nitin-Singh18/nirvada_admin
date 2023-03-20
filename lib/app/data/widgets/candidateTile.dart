@@ -25,9 +25,11 @@ class CandidateTile extends StatelessWidget {
                 Container(
                   height: 70.h,
                   width: 60.w,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage('assets/images/image3.png')),
+                        image: MemoryImage(base64Decode(
+                      model.candidateImage,
+                    )) as ImageProvider),
                   ),
                 ),
                 SizedBox(
@@ -52,7 +54,7 @@ class CandidateTile extends StatelessWidget {
                 ),
                 Image.memory(
                   base64Decode(
-                    model.candidatePartySign,
+                    model.candidateImage,
                   ),
                   height: 54.h,
                 ),
