@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:date_format/date_format.dart';
-import 'package:intl/intl.dart';
-
 import 'package:get/get.dart';
 import 'package:nirvada_admin/app/data/widgets/AppName.dart';
 import 'package:nirvada_admin/app/data/widgets/cButton.dart';
@@ -48,10 +45,14 @@ class CreateElectionView extends GetView<CreateElectionController> {
                         ))
                   ]),
               decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border(
-                      bottom:
-                          BorderSide(color: Color(0x33000000), width: 2.w))),
+                color: Colors.white,
+                border: Border(
+                  bottom: BorderSide(
+                    color: Color(0x33000000),
+                    width: 2.w,
+                  ),
+                ),
+              ),
             ),
             SizedBox(
               height: 30.h,
@@ -65,7 +66,7 @@ class CreateElectionView extends GetView<CreateElectionController> {
                     CustomTextField(
                       title: "Election Name",
                       hintText: "Enter the name of the election",
-                      controller: TextEditingController(),
+                      controller: controller.electionName,
                     ),
                     SizedBox(
                       height: 36.h,
@@ -130,13 +131,13 @@ class CreateElectionView extends GetView<CreateElectionController> {
                       child: Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: ListView.builder(
-                            itemCount: 5,
+                            itemCount: controller.subAreaList.length,
                             itemBuilder: (context, index) {
                               return Padding(
                                 padding: EdgeInsets.only(bottom: 12.h),
                                 child: ListTile(
                                   title: XText(
-                                    text: "SubArea $index",
+                                    text: controller.subAreaList[index],
                                     size: 16.sp,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -165,15 +166,16 @@ class CreateElectionView extends GetView<CreateElectionController> {
                         title: controller.date,
                         onTap: () async {
                           DateTime? datePicked = await showDatePicker(
-                              context: context,
-                              initialDate: DateTime.now(),
-                              firstDate: DateTime.now(),
-                              lastDate: DateTime(2050));
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime.now(),
+                            lastDate: DateTime(2050),
+                          );
                         },
                         iconData: Icons.calendar_month_rounded),
                     SizedBox(height: 24.h),
                     DateTimeTile(
-                        title: controller.startTime,
+                        title: controller.startTime.value,
                         onTap: () async {
                           TimeOfDay? timePicked = await showTimePicker(
                             context: context,
@@ -183,7 +185,7 @@ class CreateElectionView extends GetView<CreateElectionController> {
                         iconData: Icons.timer),
                     SizedBox(height: 24.h),
                     DateTimeTile(
-                        title: controller.endTime,
+                        title: controller.endTime.value,
                         onTap: () async {
                           TimeOfDay? timePicked = await showTimePicker(
                             context: context,

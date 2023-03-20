@@ -1,10 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nirvada_admin/app/data/models/candidate_model.dart';
 import 'package:nirvada_admin/app/data/widgets/xText.dart';
 
 class CandidateTile extends StatelessWidget {
-  const CandidateTile({super.key});
+  final CandidateModel model;
+  const CandidateTile({super.key, required this.model});
 
   @override
   Widget build(BuildContext context) {
@@ -36,24 +40,27 @@ class CandidateTile extends StatelessWidget {
                     XText(
                       size: 18,
                       fontWeight: FontWeight.bold,
-                      text: "Narendra D.Modi",
+                      text: model.candidateName,
                     ),
                     XText(
                       size: 14,
-                      text: "Bhartiya Janta Party (BJP)",
+                      text: model.candidatePartyName,
                       color: Color(0xB31B1B1B),
                       fontWeight: FontWeight.w500,
                     ),
                   ],
                 ),
-                Image.asset(
-                  "assets/images/image4.png",
-                  height: 54.sp,
+                Image.memory(
+                  base64Decode(
+                    model.candidatePartySign,
+                  ),
+                  height: 54.h,
                 ),
               ]),
           decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(6.r),),
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(6.r),
+          ),
         ),
         SizedBox(height: 18.h),
       ],
