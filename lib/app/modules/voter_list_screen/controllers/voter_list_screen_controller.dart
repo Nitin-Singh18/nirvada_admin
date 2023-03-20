@@ -1,23 +1,19 @@
 import 'package:get/get.dart';
+import 'package:nirvada_admin/app/data/models/voter_user_mode.dart';
+import 'package:nirvada_admin/app/modules/voter_list_screen/functions/voter_list_functions.dart';
 
 class VoterListScreenController extends GetxController {
-  //TODO: Implement VoterListScreenController
+  List<VoterUserModel> model = [];
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
+    onGetVoterList();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
+  void onGetVoterList() async {
+    model = await VoterListFunction.getAllVoters();
 
-  @override
-  void onClose() {
-    super.onClose();
+    update();
   }
-
-  void increment() => count.value++;
 }

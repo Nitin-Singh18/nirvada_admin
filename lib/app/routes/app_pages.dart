@@ -26,7 +26,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.VOTER_LIST_SCREEN,
-      page: () => const VoterListScreenView(),
+      page: () => VoterListScreenView(),
       binding: VoterListScreenBinding(),
     ),
     GetPage(

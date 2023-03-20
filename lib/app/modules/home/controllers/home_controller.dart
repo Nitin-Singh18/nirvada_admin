@@ -1,23 +1,19 @@
 import 'package:get/get.dart';
+import 'package:nirvada_admin/app/data/models/election_model.dart';
+import 'package:nirvada_admin/app/modules/home/functions/home_functions.dart';
 
 class HomeController extends GetxController {
-  //TODO: Implement HomeController
+  List<ElectionModel> model = [];
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
+    onGetElectionData();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
+  void onGetElectionData() async {
+    model = await HomeFunctions.getElectionDetails() ?? [];
 
-  @override
-  void onClose() {
-    super.onClose();
+    update();
   }
-
-  void increment() => count.value++;
 }

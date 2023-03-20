@@ -28,7 +28,7 @@ class CandidateTile extends StatelessWidget {
                   decoration: BoxDecoration(
                     image: DecorationImage(
                         image: MemoryImage(base64Decode(
-                      model.candidateImage,
+                      model.candidatePartySign,
                     )) as ImageProvider),
                   ),
                 ),

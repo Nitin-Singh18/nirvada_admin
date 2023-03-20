@@ -244,6 +244,13 @@ class CreateElectionController extends GetxController {
   }
 
   void onCreateElection() async {
+    List<BoothModel> booths = [
+      BoothModel(location: "haryana/gurgaon"),
+      BoothModel(location: "haryana/faridabad"),
+      BoothModel(location: "haryana/chandigargh"),
+      BoothModel(location: "haryana/badshahpur")
+    ];
+
     ElectionModel electionModel = ElectionModel(
       electionId: electionId,
       electionName: electionName.text,
@@ -252,6 +259,7 @@ class CreateElectionController extends GetxController {
       electionDate: date.value,
       electionStartingTime: startTime.value,
       electionEndingTime: endTime.value,
+      booths: booths,
     );
 
     List<Map<String, dynamic>> cadidateMapList =

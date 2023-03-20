@@ -7,7 +7,7 @@ class CreateElectionFuntions {
       Map<String, dynamic> electionDetails) async {
     try {
       Uri uri = Uri.parse(
-          "https://upset-erin-cardigan.cyclic.app/election_details/insert");
+          "https://fragile-scarf-duck.cyclic.app/election_details/insert");
 
       final response = await http.post(
         uri,

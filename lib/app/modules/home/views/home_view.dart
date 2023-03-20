@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
+import 'package:nirvada_admin/app/data/models/election_model.dart';
 import 'package:nirvada_admin/app/data/widgets/AppName.dart';
 import 'package:nirvada_admin/app/data/widgets/home_tile.dart';
 import 'package:nirvada_admin/app/routes/app_pages.dart';
@@ -63,11 +64,12 @@ class HomeView extends GetView<HomeController> {
                     child: SizedBox(
                         height: 200.h,
                         child: GridView(
-                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3,
-                            mainAxisSpacing: 26.h,
-                            crossAxisSpacing: 26.w,
-                            childAspectRatio: 3.5),
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 3,
+                                  mainAxisSpacing: 26.h,
+                                  crossAxisSpacing: 26.w,
+                                  childAspectRatio: 3.5),
                           children: [
                             HomeTile(
                                 title: "Create Election",
@@ -76,12 +78,14 @@ class HomeView extends GetView<HomeController> {
                                 onTap: () {
                                   Get.toNamed(Routes.CREATE_ELECTION);
                                 }),
-                                HomeTile(
+                            HomeTile(
                                 title: "Voters List",
                                 subtitle: "All the listed voters details",
                                 tileColor: Color(0xff06038D),
-                                onTap: () { Get.toNamed(Routes.VOTER_LIST_SCREEN);}),
-                                HomeTile(
+                                onTap: () {
+                                  Get.toNamed(Routes.VOTER_LIST_SCREEN);
+                                }),
+                            HomeTile(
                                 title: "Upcoming Election",
                                 subtitle: "List of all upcoming elections",
                                 tileColor: Color(0xff046A38),
@@ -104,30 +108,27 @@ class HomeView extends GetView<HomeController> {
                     padding: EdgeInsets.symmetric(horizontal: 24.w),
                     child: SizedBox(
                       height: 420.h,
-                      child: GridView(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3,
-                            mainAxisSpacing: 26.h,
-                            crossAxisSpacing: 26.w,
-                            childAspectRatio: 3.5),
-                        children: [
-                          HomeTile(
-                              title: "Create Election",
-                              subtitle: "Create a new Election",
+                      child: GetBuilder<HomeController>(builder: (controller) {
+                        return GridView.builder(
+                          itemCount: controller.model.length,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 3,
+                                  mainAxisSpacing: 26.h,
+                                  crossAxisSpacing: 26.w,
+                                  childAspectRatio: 3.5),
+                          itemBuilder: (context, index) {
+                            ElectionModel model = controller.model[index];
+
+                            return HomeTile(
+                              title: model.electionName,
+                              subtitle: model.electionState,
                               tileColor: Color(0xffFF671F),
-                              onTap: () {}),
-                              HomeTile(
-                                title: "Voters List",
-                                subtitle: "All the listed voters details",
-                                tileColor: Color(0xff06038D),
-                                onTap: () {}),
-                                HomeTile(
-                                title: "Upcoming Election",
-                                subtitle: "List of all upcoming elections",
-                                tileColor: Color(0xff046A38),
-                                onTap: () {})
-                        ],
-                      ),
+                              onTap: () {},
+                            );
+                          },
+                        );
+                      }),
                     ),
                   ),
                 ],
