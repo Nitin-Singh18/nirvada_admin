@@ -27,7 +27,7 @@ class ElectionFunction {
   static Future<void> sendLoginMessage() async {
     try {
       Uri uri = Uri.parse(
-          "https://fragile-scarf-duck.cyclic.app/sms/send_alert_message");
+          "https://fragile-scarf-duck.cyclic.app/sms/send_login_details");
 
       final response = await http.get(uri);
 

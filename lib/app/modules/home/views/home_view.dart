@@ -130,11 +130,17 @@ class HomeView extends GetView<HomeController> {
 
                                 final currentTime = DateTime.now();
 
-                                if (currentTime.millisecondsSinceEpoch <
+                                if (currentTime.millisecondsSinceEpoch >
                                     electionTime) {
-                                  Get.toNamed(Routes.ELECTION_SCREEN);
+                                  Get.toNamed(
+                                    Routes.ELECTION_SCREEN,
+                                    arguments: controller.model[index].toJson(),
+                                  );
                                 } else {
-                                  Get.toNamed(Routes.ELECTION_STATUS);
+                                  Get.toNamed(
+                                    Routes.ELECTION_STATUS,
+                                    arguments: controller.model[index].toJson(),
+                                  );
                                 }
                               },
                             );

@@ -31,7 +31,12 @@ class ElectionScreenView extends GetView<ElectionScreenController> {
                             fontSize: 20.sp,
                           )),
                       TextSpan(
-                          text: "18 Mar, 2023",
+                          text: DateTime.fromMillisecondsSinceEpoch(
+                                  int.tryParse(
+                                      controller.electionData.electionDate)!)
+                              .toString()
+                              .split(" ")
+                              .first,
                           style: TextStyle(
                               fontSize: 44.sp, fontWeight: FontWeight.w600))
                     ])),
