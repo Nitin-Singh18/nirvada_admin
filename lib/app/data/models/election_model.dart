@@ -26,9 +26,10 @@ class ElectionModel {
     electionDate = json['election_date'];
     electionStartingTime = json['election_starting_time'];
     electionEndingTime = json['election_ending_time'];
-    booths = (json['election_booth'] as List<Map<String, dynamic>>)
-        .map((e) => BoothModel.fromJson(e))
-        .toList();
+    // booths = (json['election_booth'] as List<Map<String, dynamic>>)
+    //     .map((e) => BoothModel.fromJson(e))
+    //     .toList();
+    booths = [];
   }
 
   Map<String, dynamic> toJson() {

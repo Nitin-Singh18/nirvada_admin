@@ -5,9 +5,15 @@ import 'package:nirvada_admin/app/modules/home/functions/home_functions.dart';
 class HomeController extends GetxController {
   List<ElectionModel> model = [];
 
+  // @override
+  // void onInit() {
+  //   super.onInit();
+  //   onGetElectionData();
+  // }
   @override
-  void onInit() {
-    super.onInit();
+  void onReady() {
+    // TODO: implement onReady
+    super.onReady();
     onGetElectionData();
   }
 

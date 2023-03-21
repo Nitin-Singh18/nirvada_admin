@@ -9,21 +9,25 @@ class HomeFunctions {
       Uri uri = Uri.parse(
           "https://fragile-scarf-duck.cyclic.app/election_details/get");
 
-      final response = await http.get(uri);
+      final response = await http.get(uri, headers: {
+        "Content-Type": "application/json",
+      });
 
       List<ElectionModel> model = [];
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         Map<String, dynamic> data = json.decode(response.body);
 
-        print(data);
+        print(data['data']);
 
         List list = data['data'];
 
+        List<Map<String, dynamic>> mappedList =
+            list.cast<Map<String, dynamic>>();
+
         print(list);
 
-        model =
-            list.map((e) => ElectionModel.fromJson(json.decode(e))).toList();
+        model = mappedList.map((e) => ElectionModel.fromJson(e)).toList();
 
         return model;
       }

@@ -74,17 +74,35 @@ class ElectionScreenView extends GetView<ElectionScreenController> {
                 padding: EdgeInsets.symmetric(horizontal: 24.w),
                 child: SizedBox(
                   height: 200.h,
-                  // child: GridView.builder(
-                  //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  //       crossAxisCount: 3,
-                  //       mainAxisSpacing: 26.h,
-                  //       crossAxisSpacing: 26.w,
-                  //       childAspectRatio: 3.5),
-                  //   itemCount: 3,
-                  //   itemBuilder: (context, index) {
-                  //     return HomeTile();
-                  //   },
-                  // ),
+                  child: Row(
+                    children: [
+                      HomeTile(
+                        title: "Send Alert Message",
+                        subtitle:
+                            "Send a SMS to alert the voters for upcoming election",
+                        tileColor: Color(0xffFF671F),
+                        onTap: () {
+                          controller.onSendAlertMessage();
+                        },
+                      ),
+                      HomeTile(
+                        title: "Send Login Details",
+                        subtitle:
+                            "Send a SMS to alert the voters for upcoming election",
+                        tileColor: Color(0xffFF671F),
+                        onTap: () {
+                          controller.onSendLoginCrendentials();
+                        },
+                      ),
+                      HomeTile(
+                        title: "Send Election Updates",
+                        subtitle:
+                            "Send a SMS to alert the voters for upcoming election",
+                        tileColor: Color(0xffFF671F),
+                        onTap: () {},
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Padding(

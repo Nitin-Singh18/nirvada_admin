@@ -23,6 +23,7 @@ class CreateElectionController extends GetxController {
   String base64EncodedCandidatePartyImage = "";
 
   RxString date = "Select Election Date".obs;
+  String milisecondsDate = "";
   RxString startTime = "Select Alloted Election Start Time".obs;
   RxString endTime = "Select Alloted Election End Time".obs;
   RxString electionType = "State".obs;
@@ -66,6 +67,8 @@ class CreateElectionController extends GetxController {
 
     if (datePicked != null) {
       date.value = "${datePicked.day}-${datePicked.month}-${datePicked.year}";
+      milisecondsDate = datePicked.millisecondsSinceEpoch.toString();
+      print(milisecondsDate);
     }
   }
 
@@ -256,7 +259,7 @@ class CreateElectionController extends GetxController {
       electionName: electionName.text,
       electionType: electionType.value,
       electionState: state,
-      electionDate: date.value,
+      electionDate: milisecondsDate,
       electionStartingTime: startTime.value,
       electionEndingTime: endTime.value,
       booths: booths,

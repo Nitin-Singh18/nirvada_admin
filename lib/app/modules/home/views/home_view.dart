@@ -124,7 +124,19 @@ class HomeView extends GetView<HomeController> {
                               title: model.electionName,
                               subtitle: model.electionState,
                               tileColor: Color(0xffFF671F),
-                              onTap: () {},
+                              onTap: () {
+                                final electionTime =
+                                    int.parse(model.electionDate);
+
+                                final currentTime = DateTime.now();
+
+                                if (currentTime.millisecondsSinceEpoch <
+                                    electionTime) {
+                                  Get.toNamed(Routes.ELECTION_SCREEN);
+                                } else {
+                                  Get.toNamed(Routes.ELECTION_STATUS);
+                                }
+                              },
                             );
                           },
                         );
